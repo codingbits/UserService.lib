@@ -1,0 +1,16 @@
+{
+  "name": "UserService.lib",
+  "author": "Daniel Scholl",
+  "description": "A Simple CRUD UserService",
+  "version": "0.0.1",
+  "dependencies": {
+    "lodash": "^3.4.0",
+    "mongoDAL": "git+https://github.com/vzdigitalmedia/mongoDAL.lib.git",
+    "node-uuid": "^1.4.3",
+    "verror": "^1.6.0"
+  },
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "mocha": "^2.1.0"
+  }
+}
