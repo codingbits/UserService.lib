@@ -7,6 +7,7 @@ var UserService = require('../lib/user.service');
 var db = require('mongoDAL');
 var assert = require('assert');
 var bcrypt = require('bcrypt');
+var _ = require('lodash');
 var config = require('./config.json');
 
 describe('UserService', function() {
@@ -235,6 +236,46 @@ describe('UserService', function() {
         done();
       });
     });
+  });
+
+  describe('User Search', function() {
+    var userService = new UserService(config);
+    var dto = require('./user.json');
+    var dto2 = {'email': 'test2@mail.com'};
+
+    var user1 = null;
+    var user2 = null;
+
+    before(function(done) {
+      userService.create(dto, function(err, result) {
+        assert.ok(result.success, result.message);
+        user1 = result.data;
+        userService.create(dto2, function(err, result) {
+          user2 = result.data;
+          done();
+        });
+      });
+    });
+
+    it('Should find a user by email', function(done) {
+      userService.search({'email': 'test2'}, function(err, result) {
+        result.data.list.length.should.equal(1);
+        done();
+      });
+    });
+
+    after(function(done){
+      db.users.destroy(user1.id, function(err, result) {
+        assert.ok(err === null, result);
+
+        db.users.destroy(user2.id, function(err, result) {
+          assert.ok(err === null, result);
+          done();
+        });
+
+      });
+    });
+
   });
 });
 
