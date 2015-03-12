@@ -5,7 +5,9 @@
   "describe"   : false,
   "expect"     : false,
   "before"     : false,
-  "beforeEach" : false
+  "after"      : false,
+  "beforeEach" : false,
+  "should"     : false
  },
 
  /*

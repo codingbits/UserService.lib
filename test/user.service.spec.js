@@ -1,25 +1,27 @@
-/* jshint -W024 */
+/* jshint -W024, -W101, -W079, -W098 */
 /* jshint expr:true */
 'use strict';
+
+var should = require('chai').should();
 var UserService = require('../lib/user.service');
-var db = require("mongoDAL");
+var db = require('mongoDAL');
 var assert = require('assert');
 var config = require('./config.json');
 
-describe("UserService", function() {
-  var userService = null;
+describe('UserService', function() {
 
   before(function(done){
     db.connect(config.mongo, function(err, db){
-      db.dropDb(config.mongo.db, function(err, result){
-        db.install(['users'], function(err, result){
+      assert.ok(db, err);
+      db.dropDb(config.mongo.db, function(){
+        db.install(['users'], function(){
           done();
         });
       });
     });
   });
 
-  describe("Create User", function(done) {
+  describe('Create User', function() {
     var userService = new UserService(config);
     var dto = require('./user.json');
     var user = null;
@@ -60,11 +62,11 @@ describe("UserService", function() {
     });
   });
 
-  describe("Custom User Model", function(done) {
+  describe('Custom User Model', function() {
     var userService = new UserService(config);
     var dto = {};
-    dto.email = "test@mail.com";
-    dto.name = "Test User";
+    dto.email = 'test@mail.com';
+    dto.name = 'Test User';
 
     var user = null;
 
@@ -100,7 +102,7 @@ describe("UserService", function() {
     });
   });
 
-  describe('Read User', function(done) {
+  describe('Read User', function() {
     var userService = new UserService(config);
     var dto = require('./user.json');
     var user = null;
@@ -127,7 +129,7 @@ describe("UserService", function() {
     });
   });
 
-  describe('Update User', function(done) {
+  describe('Update User', function() {
     var userService = new UserService(config);
     var dto = require('./user.json');
     var user = null;
@@ -140,8 +142,8 @@ describe("UserService", function() {
       });
     });
     it('Updates an item by Id', function(done) {
-      user.firstName = "ChangedFirst";
-      user.lastName = "ChangedLast";
+      user.firstName = 'ChangedFirst';
+      user.lastName = 'ChangedLast';
 
       userService.update(user, function(err, result) {
         result.success.should.be.true;
@@ -158,7 +160,7 @@ describe("UserService", function() {
     });
   });
 
-  describe('Delete User', function(done) {
+  describe('Delete User', function() {
     var userService = new UserService(config);
     var dto = require('./user.json');
     var user = null;
@@ -178,7 +180,7 @@ describe("UserService", function() {
     });
   });
 
-  describe('User List', function(done) {
+  describe('User List', function() {
     var userService = new UserService(config);
     var dto = require('./user.json');
     var user = null;
@@ -190,7 +192,6 @@ describe("UserService", function() {
         done();
       });
     });
-
     it('should respond with a JSON Object with Users as an Array', function(done) {
       userService.list({pageSize: 5, pageIndex: 0}, function(err, result) {
         result.success.should.be.true;
@@ -227,8 +228,5 @@ describe("UserService", function() {
       });
     });
   });
-
-
-
 });
 

@@ -8,7 +8,7 @@ var UserService = function(){
 
 
   self.setup = function (config, userModel){
-    service = new Service(config);
+    service = new Service(config, userModel);
   };
 
   self.create = function(input, done) {
