@@ -6,7 +6,8 @@ var UserService = function(){
   var self = this;
   var service = null;
 
-  self.setup = function (config, InjectedService){
+
+  self.setup = function (config, userModel){
     service = new Service(config);
   };
 
@@ -39,7 +40,7 @@ var UserService = function(){
     service.search(input, function(err, result) {
       done(err, result);
     });
-  }
+  };
 
   return self;
 };
