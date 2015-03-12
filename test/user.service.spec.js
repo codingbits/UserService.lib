@@ -6,6 +6,7 @@ var should = require('chai').should();
 var UserService = require('../lib/user.service');
 var db = require('mongoDAL');
 var assert = require('assert');
+var bcrypt = require('bcrypt');
 var config = require('./config.json');
 
 describe('UserService', function() {
@@ -52,6 +53,13 @@ describe('UserService', function() {
     });
     it('Defines a Property LastName', function(done) {
       (user.lastName === null).should.be.false;
+      done();
+    });
+    it('Defines a Property Password', function(done) {
+      (user.password === null).should.be.false;
+      user.password.should.not.equal(dto.password);
+      var match = bcrypt.compareSync(dto.password, user.password); // false
+      match.should.be.true;
       done();
     });
     after(function(done){

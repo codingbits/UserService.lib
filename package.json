@@ -4,6 +4,7 @@
   "description": "A Simple CRUD UserService",
   "version": "0.0.1",
   "dependencies": {
+    "bcrypt": "^0.8.1",
     "debug": "^2.1.2",
     "lodash": "^3.4.0",
     "mongoDAL": "git+https://github.com/vzdigitalmedia/mongoDAL.lib.git",
