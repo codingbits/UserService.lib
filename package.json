@@ -2,7 +2,7 @@
   "name": "UserService.lib",
   "author": "Daniel Scholl",
   "description": "A Simple CRUD UserService",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "bcrypt": "^0.8.1",
     "debug": "^2.1.2",
